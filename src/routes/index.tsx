@@ -78,9 +78,9 @@ function Home() {
           <p className="text-lg leading-relaxed max-w-xl font-bold">
             a software developer passionate about building scalable applications and solving real-world problems through technology.
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
+          {/* <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
             From backend systems and APIs to cloud infrastructure and fullstack development, I enjoy creating solutions that are efficient, reliable, and impactful. When I’m not coding, you’ll find me improving my English, exploring new technologies, or preparing for my next professional challenge.
-          </p>
+          </p> */}
           <div className="flex flex-wrap gap-3">
             <Link
               to="/"

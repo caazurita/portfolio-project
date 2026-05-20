@@ -51,15 +51,33 @@ function Resume() {
       <section className="space-y-3">
         <h2 className="text-xl font-semibold">About</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Hello,
+          <p>
+            I am a Software Developer with over 4 years of professional experience building APIs, backend services, web applications and data-driven systems using Node.js | TypeScript | React | Python | MongoDB | PostgreSQL | AWS.
+          </p>
+          <br />
+          <p>
+          Strong background in:
+          </p>
+          * Developing RESTful APIs and secure authorization systems
+          <br />
+          * Database optimization
+          <br />
+          * System integrations for SaaS platforms and third-party services
+          <br />
+          * Build scalable Backend architecture
+          <br />
+          * Cloud Solutions using AWS.\
+          <br />
+          * Implementing bulk data processing for logistics operations
+          <br />
+          * Creating automation, reporting, and data ingestion workflows
+          <br />
+          <br />
 
-          I am a Software Developer with over 4 years of experience in software development building APIs, backend services, web applications and data-driven systems using Node.js, TypeScript, Python, MongoDB, SQL databases, and AWS.
-
-          I’ve worked on several projects across different sectors, such as logistic companies, supermarkets, retail companies and also smaller projects. in the legal field.
-
-          Currently focused on backend/frontend performance and data-oriented roles and expanding my skills into AI-powered integrations, including LLM API consumption and intelligent automation solutions using Python.
-
-
+          Currently focused on backend and data-oriented roles, including data ingestion, automation, reporting, and system integration.
+          <br />
+          <br />
+          And expanding my skills into AI-powered integrations, including LLM API consumption and intelligent automation solutions using Python.
         </p>
       </section>
 
