@@ -23,10 +23,3 @@ tags:
     "Google Map Platform"
   ]
 ---
-- Developed, designed and delivered custom web applications with React.js and Vue.js for multiple business domains (logistics,
-  legal services, delivery platforms, retail).
-- Designed and implemented RESTful APIs using Node.js and Express.js, enabling integration with web and mobile applications.
-- Built relational databases using MySQL and PostgreSQL, including schema design, indexes, stored procedures, and complex
-  queries.
-- Documented APIs using Swagger, improving integration and collaboration with frontend and external developers.
-- Collaborated directly with clients to gather requirements, propose technical solutions, and deliver scalable backend systems.

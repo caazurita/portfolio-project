@@ -20,7 +20,7 @@ function Resume() {
           <p className="text-lg text-muted-foreground">Software Developer</p>
           <div className="flex flex-wrap gap-4 pt-2 text-sm text-muted-foreground">
             <span className="flex items-center gap-1">
-              <MapPin size={14} /> Remote — Bolivia
+              <MapPin size={14} /> Santa Cruz de la Sierra, Bolivia - Remote
             </span>
             <a
               href="mailto:alex@example.com"
@@ -115,9 +115,9 @@ function Resume() {
                     </Badge>
                   ))}
                 </div>
-                <p className="text-sm font-bold">
+                {/* <p className="text-sm font-bold">
                   Responsibilities
-                </p>
+                </p> */}
                 {job.content && (
                   <div
                     className="prose prose-sm max-w-none prose-ul:list-disc prose-ul:pl-5 prose-li:marker:text-muted-foreground prose-li:text-muted-foreground prose-li:leading-relaxed prose-li:mb-1"
