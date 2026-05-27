@@ -3,6 +3,7 @@ import { allProjects } from 'content-collections'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowRight, Github, Linkedin, Mail, ExternalLink, Monitor, Building } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { localizeField, useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -60,6 +61,7 @@ const skills = [
 ]
 
 function Home() {
+  const { t, locale } = useLocale()
   const featuredProjects = allProjects.slice(0, 3)
 
   return (
@@ -69,30 +71,30 @@ function Home() {
         <div className="flex-1 space-y-6">
           <div className="space-y-2">
             <p className="text-sm font-medium uppercase tracking-widest">
-              Software Developer
+              {t('home.hero.subtitle')}
             </p>
             <h1 className="text-5xl font-bold tracking-tight">
-              Hi, I'm Carlos
+              {t('home.hero.title')}
             </h1>
           </div>
           <p className="text-lg leading-relaxed max-w-xl font-bold">
-            a software developer passionate about building scalable applications and solving real-world problems through technology.
+            {t('home.hero.description')}
           </p>
           {/* <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
             From backend systems and APIs to cloud infrastructure and fullstack development, I enjoy creating solutions that are efficient, reliable, and impactful. When I’m not coding, you’ll find me improving my English, exploring new technologies, or preparing for my next professional challenge.
           </p> */}
           <div className="flex flex-wrap gap-3">
             <Link
-              to="/"
+              to="/projects"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
             >
-              View Projects <ArrowRight size={16} />
+              {t('home.hero.viewProjects')} <ArrowRight size={16} />
             </Link>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-lg text-sm font-medium hover:bg-accent transition-colors"
             >
-              Get in Touch <Mail size={16} />
+              {t('home.hero.getInTouch')} <Mail size={16} />
             </Link>
           </div>
           <div className="flex items-center gap-4 pt-2">
@@ -127,7 +129,7 @@ function Home() {
 
       {/* Skills */}
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold">Expertise</h2>
+        <h2 className="text-2xl font-semibold">{t('home.expertise')}</h2>
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
             <Badge key={skill} variant="secondary" className="text-sm px-3 py-1">
@@ -140,12 +142,12 @@ function Home() {
       {/* Featured Projects */}
       <section className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Featured Projects</h2>
+          <h2 className="text-2xl font-semibold">{t('home.featuredProjects')}</h2>
           <Link
             to="/projects"
             className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-1 transition-colors"
           >
-            All projects <ArrowRight size={14} />
+            {t('home.allProjects')} <ArrowRight size={14} />
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -155,11 +157,11 @@ function Home() {
               className="flex flex-col hover:shadow-md transition-shadow"
             >
               <CardHeader className="pb-2">
-                <CardTitle className="text-base">{project.title}</CardTitle>
+                <CardTitle className="text-base">{localizeField(project, 'title', locale)}</CardTitle>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col gap-3">
                 <p className="text-sm text-muted-foreground flex-1">
-                  {project.description}
+                  {localizeField(project, 'description', locale)}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {project.tags.slice(0, 3).map((tag) => (
@@ -176,7 +178,7 @@ function Home() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      <Github size={13} /> GitHub
+                      <Github size={13} /> {t('projects.github')}
                     </a>
                   )}
                   {project.mockup && (
@@ -187,7 +189,7 @@ function Home() {
                       className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Monitor size={15} />
-                      Mockups
+                      {t('projects.mockups')}
                     </a>
                   )}
                   {project.company && (
@@ -198,7 +200,7 @@ function Home() {
                       className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Building size={15} />
-                      Corporation
+                      {t('projects.corporation')}
                     </a>
                   )}
                   {project.liveUrl && (
@@ -208,7 +210,7 @@ function Home() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      <ExternalLink size={13} /> Live
+                      <ExternalLink size={13} /> {t('projects.liveDemo')}
                     </a>
                   )}
                 </div>

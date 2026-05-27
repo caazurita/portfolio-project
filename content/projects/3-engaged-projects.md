@@ -1,6 +1,8 @@
 ---
-title: "Engaged's Projects"
-description: "Developed and delivered custom web applications using React.js, Vue.js, Node.js, and Express.js across multiple industries. Designed RESTful APIs, built relational databases with MySQL and PostgreSQL, documented APIs with Swagger, and collaborated directly with clients to deliver scalable solutions."
+title-en: "Engaged's Projects"
+title-es: "Engaged's Projects"
+description-en: "Developed and delivered custom web applications using React.js, Vue.js, Node.js, and Express.js across multiple industries. Designed RESTful APIs, built relational databases with MySQL and PostgreSQL, documented APIs with Swagger, and collaborated directly with clients to deliver scalable solutions."
+description-es: "Desarrollé y entregué aplicaciones web personalizadas utilizando React.js, Vue.js, Node.js y Express.js en múltiples industrias. Diseñé APIs RESTful, construí bases de datos relacionales con MySQL y PostgreSQL, documenté APIs con Swagger y colaboré directamente con clientes para ofrecer soluciones escalables."
 tags:
   [
     "JavaScript",
@@ -23,6 +25,8 @@ company: "https://tech.engaged.com.bo/en/home/"
 images:
   [
     "/projects/engaged/eg_0.png",
+    "/projects/engaged/eg_9.png",
+    "/projects/engaged/eg_10.png",
     "/projects/engaged/eg_1.png",
     "/projects/engaged/eg_2.jpeg",
     "/projects/engaged/eg_4.jpeg",

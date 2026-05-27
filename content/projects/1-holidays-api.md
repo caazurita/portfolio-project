@@ -1,6 +1,8 @@
 ---
-title: "Holidays API"
-description: "Developed a FastAPI-powered REST API that fetches public holidays worldwide, enriches them with AI-generated summaries and categories by national, cultural, and religious and caches results in Redis for performance."
+title-en: "Holidays API"
+title-es: "Holidays API"
+description-en: "Developed a API that fetches public holidays worldwide, aggregates them with AI-generated summaries and categories by national, cultural, and religious and caches results in Redis for performance."
+description-es: "Desarrollé una API REST que obtiene días festivos públicos a nivel mundial, agrega resúmenes y categorías generados por IA según su carácter nacional, cultural y religioso, y almacena en caché los resultados en Redis para mejorar el rendimiento."
 tags:
   [
     "Python",
@@ -8,7 +10,8 @@ tags:
     "Redis",
     "Gemini",
   ]
-github: "https://github.com/Pedidos-Online/holidays-app-py"
+github: "https://github.com/caazurita/holidays-app-py.git"
+liveUrl: "https://holidays-app-py.onrender.com"
 images:
   [
     "/default-image.png",

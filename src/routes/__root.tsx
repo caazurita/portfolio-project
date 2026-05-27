@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header'
+import { LocaleProvider } from '@/lib/use-locale'
 import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 
 import '../styles.css'
@@ -21,7 +22,7 @@ export const Route = createRootRoute({
 })
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{
           __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}})()`
@@ -38,11 +39,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function RootLayout() {
   return (
-    <>
+    <LocaleProvider>
       <Header />
       <main>
         <Outlet />
       </main>
-    </>
+    </LocaleProvider>
   )
 }

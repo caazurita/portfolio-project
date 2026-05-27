@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Carousel } from '@/components/ui/carousel'
 import { Building, ExternalLink, Github, Monitor } from 'lucide-react'
+import { localizeField, useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/projects')({
     component: Projects,
@@ -42,13 +43,13 @@ function ProjectImage({
 }
 
 function Projects() {
+    const { t, locale } = useLocale()
     return (
         <div className="max-w-5xl mx-auto px-4 py-12">
             <div className="mb-10">
-                <h1 className="text-4xl font-bold mb-2">Projects</h1>
+                <h1 className="text-4xl font-bold mb-2">{t('projects.title')}</h1>
                 <p className="text-muted-foreground text-lg">
-                    A selection of things I&apos;ve worked on, including personal projects, projects I participated in,
-                    client deliverables, and more.
+                    {t('projects.description')}
                 </p>
             </div>
 
@@ -58,12 +59,12 @@ function Projects() {
                         key={project._meta.path}
                         className="group flex flex-col hover:shadow-md transition-shadow overflow-hidden p-0"
                     >
-                        <ProjectImage images={project.images} title={project.title} />
+                        <ProjectImage images={project.images} title={localizeField(project, 'title', locale)} />
                         <CardHeader className="pt-5">
-                            <CardTitle className="text-xl">{project.title}</CardTitle>
+                            <CardTitle className="text-xl">{localizeField(project, 'title', locale)}</CardTitle>
                         </CardHeader>
                         <CardContent className="flex-1 flex flex-col gap-4">
-                            <p className="text-muted-foreground flex-1">{project.description}</p>
+                            <p className="text-muted-foreground flex-1">{localizeField(project, 'description', locale)}</p>
                             <div className="flex flex-wrap gap-2">
                                 {project.tags.map((tag) => (
                                     <Badge key={tag} variant="secondary">
@@ -80,7 +81,7 @@ function Projects() {
                                         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                                     >
                                         <Github size={15} />
-                                        GitHub
+                                        {t('projects.github')}
                                     </a>
                                 )}
                                 {project.mockup && (
@@ -91,7 +92,7 @@ function Projects() {
                                         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                                     >
                                         <Monitor size={15} />
-                                        Mockups
+                                        {t('projects.mockups')}
                                     </a>
                                 )}
                                 {project.company && (
@@ -102,7 +103,7 @@ function Projects() {
                                         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                                     >
                                         <Building size={15} />
-                                        Corporation
+                                        {t('projects.corporation')}
                                     </a>
                                 )}
                                 {project.liveUrl && (
@@ -113,7 +114,7 @@ function Projects() {
                                         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                                     >
                                         <ExternalLink size={15} />
-                                        Live Demo
+                                        {t('projects.liveDemo')}
                                     </a>
                                 )}
                             </div>

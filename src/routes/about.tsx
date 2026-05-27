@@ -1,9 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/about')({
     component: About,
 })
 
 function About() {
-    return <h2>About Page</h2>
+    const { t } = useLocale()
+    return <h2>{t('resume.about')}</h2>
 }

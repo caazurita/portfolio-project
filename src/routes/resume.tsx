@@ -5,12 +5,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { MapPin, Calendar, ArrowRight } from 'lucide-react'
+import { localizeField, useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/resume')({
   component: Resume,
 })
 
 function Resume() {
+  const { t, locale } = useLocale()
+  if (locale === 'es') {
+    console.log('Locale is Spanish')
+  } else {
+    console.log('Locale is not Spanish')
+  }
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 space-y-12">
       {/* Header */}
@@ -20,7 +27,7 @@ function Resume() {
           <p className="text-lg text-muted-foreground">Software Developer</p>
           <div className="flex flex-wrap gap-4 pt-2 text-sm text-muted-foreground">
             <span className="flex items-center gap-1">
-              <MapPin size={14} /> Santa Cruz de la Sierra, Bolivia - Remote
+              <MapPin size={14} /> {t('resume.location')}
             </span>
             <a
               href="mailto:alex@example.com"
@@ -49,50 +56,83 @@ function Resume() {
 
       {/* Summary */}
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold">About</h2>
-        <p className="text-muted-foreground leading-relaxed">
-          <p>
-            I am a Software Developer with over 4 years of professional experience building APIs, backend services, web applications and data-driven systems using Node.js | TypeScript | React | Python | MongoDB | PostgreSQL | AWS.
-          </p>
-          <br />
-          <p>
-          Strong background in:
-          </p>
-          * Developing RESTful APIs and secure authorization systems
-          <br />
-          * Database optimization
-          <br />
-          * System integrations for SaaS platforms and third-party services
-          <br />
-          * Build scalable Backend architecture
-          <br />
-          * Cloud Solutions using AWS.\
-          <br />
-          * Implementing bulk data processing for logistics operations
-          <br />
-          * Creating automation, reporting, and data ingestion workflows
-          <br />
-          <br />
+        <h2 className="text-xl font-semibold">{t('resume.about')}</h2>
+        {
+          locale === 'en'
+            ? <p className="text-muted-foreground leading-relaxed">
+              <p>
+                I am a Software Developer with over 4 years of professional experience building APIs, backend services, web applications and data-driven systems using Node.js | TypeScript | React | Python | MongoDB | PostgreSQL | AWS.
+              </p>
+              <br />
+              <p>
+                Strong background in:
+              </p>
+              * Developing RESTful APIs and secure authorization systems
+              <br />
+              * Database optimization
+              <br />
+              * System integrations for SaaS platforms and third-party services
+              <br />
+              * Build scalable Backend architecture
+              <br />
+              * Cloud Solutions using AWS.
+              <br />
+              * Implementing bulk data processing for logistics operations
+              <br />
+              * Creating automation, reporting, and data ingestion workflows
+              <br />
+              <br />
 
-          Currently focused on backend and data-oriented roles, including data ingestion, automation, reporting, and system integration.
-          <br />
-          <br />
-          And expanding my skills into AI-powered integrations, including LLM API consumption and intelligent automation solutions using Python.
-        </p>
+              Currently focused on backend and data-oriented roles, including data ingestion, automation, reporting, and system integration.
+              <br />
+              <br />
+              And expanding my skills into AI-powered integrations, including LLM API consumption and intelligent automation solutions using Python.
+            </p>
+            : <p className="text-muted-foreground leading-relaxed">
+              <p>
+                Soy un desarrollador de software con más de 4 años de experiencia profesional construyendo APIs, servicios backend, aplicaciones web y sistemas orientados a datos utilizando Node.js | TypeScript | React | Python | MongoDB | PostgreSQL | AWS.
+              </p>
+              <br />
+              <p>
+                Mi experiencia se centra en:
+              </p>
+              * Desarrollo de APIs RESTful y sistemas de autorización seguros
+              <br />
+              * Optimizacion de bases de datos
+              <br />
+              * Integraciones de sistemas para plataformas SaaS y servicios de terceros
+              <br />
+              * Construcción de arquitecturas backend escalables
+              <br />
+              * Soluciones en la nube utilizando AWS.
+              <br />
+              * Implementanción de procesamiento de datos a gran escala para operaciones logísticas
+              <br />
+              * Creación de flujos de trabajo de automatización, informes e ingestión de datos
+              <br />
+              <br />
+
+              Actualmente enfocado en roles orientados a backend/frontend y datos, incluyendo ingestión de datos, automatización, informes e integración de sistemas.
+              <br />
+              <br />
+              Y expandiendo mis habilidades hacia integraciones impulsadas por IA, incluyendo el consumo de APIs de LLM y soluciones de automatización inteligente utilizando Python.
+            </p>
+        }
+
       </section>
 
       {/* Work Experience */}
       <section className="space-y-6">
-        <h2 className="text-xl font-semibold">Work Experience</h2>
+        <h2 className="text-xl font-semibold">{t('resume.workExperience')}</h2>
         <div className="space-y-6">
           {allJobs.map((job) => (
-            <Card key={`${job.company}-${job.jobTitle}`}>
+            <Card key={`${job.company}-${localizeField(job, 'jobTitle', locale)}`}>
               <CardHeader className="pb-3">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                   <div>
-                    <CardTitle className="text-lg">{job.jobTitle}</CardTitle>
+                    <CardTitle className="text-lg">{localizeField(job, 'jobTitle', locale)}</CardTitle>
                     <p className="text-muted-foreground text-sm mt-0.5">
-                      {job.company} · {job.location}
+                      {localizeField(job, 'company', locale)} · {localizeField(job, 'location', locale)}
                     </p>
                   </div>
                   <Badge
@@ -100,13 +140,13 @@ function Resume() {
                     className="text-xs self-start whitespace-nowrap flex items-center gap-1"
                   >
                     <Calendar size={11} />
-                    {job.startDate} – {job.endDate ?? 'Present'}
+                    {job.startDate} – {job.endDate ?? t('resume.present')}
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {job.summary}
+                  {localizeField(job, 'summary', locale)}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {job.tags.map((tag) => (
@@ -132,7 +172,7 @@ function Resume() {
 
       {/* Education */}
       <section className="space-y-6">
-        <h2 className="text-xl font-semibold">Education</h2>
+        <h2 className="text-xl font-semibold">{t('resume.education')}</h2>
         <div className="space-y-4">
           {allEducations.map((education) => (
             <Card key={education.school}>
@@ -149,7 +189,7 @@ function Resume() {
                     className="text-xs self-start whitespace-nowrap flex items-center gap-1"
                   >
                     <Calendar size={11} />
-                    {education.startDate} – {education.endDate ?? 'Present'}
+                    {education.startDate} – {education.endDate ?? t('resume.present')}
                   </Badge>
                 </div>
               </CardHeader>
@@ -221,7 +261,7 @@ function Resume() {
           to="/contact"
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
         >
-          Contact Me <ArrowRight size={16} />
+          {t('resume.contactMe')} <ArrowRight size={16} />
         </Link>
       </div>
     </div>

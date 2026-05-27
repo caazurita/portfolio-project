@@ -3,12 +3,14 @@ import { allBlogs } from 'content-collections'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Calendar } from 'lucide-react'
+import { useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/blog')({
   component: BlogIndex,
 })
 
 function BlogIndex() {
+  const { t, locale } = useLocale()
   const posts = [...allBlogs].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   )
@@ -16,9 +18,9 @@ function BlogIndex() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="mb-10">
-        <h1 className="text-4xl font-bold mb-2">Blog</h1>
+        <h1 className="text-4xl font-bold mb-2">{t('blog.title')}</h1>
         <p className="text-muted-foreground text-lg">
-          Thoughts on web development, design, and technology.
+          {t('blog.description')}
         </p>
       </div>
 
@@ -36,7 +38,7 @@ function BlogIndex() {
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Calendar size={14} />
                   <time>
-                    {new Date(post.date).toLocaleDateString('en-US', {
+                    {new Date(post.date).toLocaleDateString(locale, {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
