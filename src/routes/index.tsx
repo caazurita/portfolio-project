@@ -3,6 +3,7 @@ import { allProjects } from 'content-collections'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowRight, Github, Linkedin, Mail, ExternalLink, Monitor, Building } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { ImageWithLoader } from '@/components/ui/image-with-loader'
 import { localizeField, useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/')({
@@ -119,10 +120,11 @@ function Home() {
           </div>
         </div>
         <div className="shrink-0">
-          <img
+          <ImageWithLoader
             src="/profile.png"
             alt="Carlos Alberto"
-            className="w-48 h-56 md:w-56 md:h-64 rounded-2xl object-cover shadow-lg"
+            containerClassName="w-48 h-56 md:w-56 md:h-64 rounded-2xl shadow-lg shrink-0"
+            className="object-cover w-full h-full"
           />
         </div>
       </section>

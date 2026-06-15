@@ -17,25 +17,8 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  shellComponent: RootDocument,
   component: RootLayout,
 })
-function RootDocument({ children }: { children: React.ReactNode }) {
-  return (
-    <html suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}})()`
-        }} />
-        <HeadContent />
-      </head>
-      <body className="min-h-screen bg-background text-foreground">
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  )
-}
 
 function RootLayout() {
   return (
@@ -44,6 +27,8 @@ function RootLayout() {
       <main>
         <Outlet />
       </main>
+      <HeadContent />
+      <Scripts />
     </LocaleProvider>
   )
 }

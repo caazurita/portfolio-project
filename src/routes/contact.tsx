@@ -1,32 +1,60 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
-import { Mail, Send } from 'lucide-react'
+import { type FormEvent, useState } from 'react'
+import { CheckCircle, Loader2, Send } from 'lucide-react'
 import { useLocale } from '@/lib/use-locale'
+import emailjs from '@emailjs/browser'
 
 export const Route = createFileRoute('/contact')({
   component: Contact,
 })
 
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string
+
 function Contact() {
   const { t } = useLocale()
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setSending(true)
+    setError(null)
+
+    const form = e.currentTarget
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, {
+        publicKey: PUBLIC_KEY,
+      })
+      setSubmitted(true)
+      form.reset()
+    } catch(error) {
+      console.error('EmailJS error:', error)
+      setError('Failed to send message. Please try again.')
+    } finally {
+      setSending(false)
+    }
+  }
 
   if (submitted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md mx-auto px-4">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Mail className="w-8 h-8 text-green-600" />
+            <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold mb-2">
             {t('contact.successTitle')}
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-muted-foreground mb-6">
             {t('contact.successMessage')}
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+            className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium"
           >
             {t('contact.sendAnother')}
           </button>
@@ -43,37 +71,11 @@ function Contact() {
           {t('contact.description')}
         </p>
 
-        {/* <form
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          onSubmit={(e) => {
-            e.preventDefault()
-            const form = e.currentTarget
-            const formData = new FormData(form)
-            fetch('/contact.html', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: new URLSearchParams(
-                formData as unknown as Record<string, string>,
-              ).toString(),
-            })
-              .then(() => setSubmitted(true))
-          }}
-          className="space-y-6"
-        > */}
-          <input type="hidden" name="form-name" value="contact" />
-          <p hidden>
-            <label>
-              Don't fill this out: <input name="bot-field" />
-            </label>
-          </p>
-
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium mb-1"
             >
               {t('contact.name')}
             </label>
@@ -82,7 +84,7 @@ function Contact() {
               id="name"
               name="name"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+              className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors bg-background"
               placeholder={t('contact.namePlaceholder')}
             />
           </div>
@@ -90,7 +92,7 @@ function Contact() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium mb-1"
             >
               {t('contact.email')}
             </label>
@@ -99,7 +101,7 @@ function Contact() {
               id="email"
               name="email"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+              className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors bg-background"
               placeholder={t('contact.emailPlaceholder')}
             />
           </div>
@@ -107,7 +109,7 @@ function Contact() {
           <div>
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium mb-1"
             >
               {t('contact.message')}
             </label>
@@ -116,18 +118,24 @@ function Contact() {
               name="message"
               required
               rows={6}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-none"
+              className="w-full px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors resize-none bg-background"
               placeholder={t('contact.messagePlaceholder')}
             />
           </div>
 
+          {error && (
+            <p className="text-sm text-red-500">{error}</p>
+          )}
+
           <button
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium cursor-not-allowed"
+            type="submit"
+            disabled={sending}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium disabled:opacity-50 cursor-pointer"
           >
-            <Send size={16} />
-            {t('contact.send')}
+            {sending ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+            {sending ? 'Sending...' : t('contact.send')}
           </button>
-        {/* </form> */}
+        </form>
       </div>
     </div>
   )

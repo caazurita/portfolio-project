@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { MapPin, Calendar, ArrowRight } from 'lucide-react'
+import { ImageWithLoader } from '@/components/ui/image-with-loader'
 import { localizeField, useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/resume')({
@@ -45,10 +46,11 @@ function Resume() {
             </a>
           </div>
         </div>
-        <img
+        <ImageWithLoader
           src="/profile.png"
           alt="Alex Johnson"
-          className="hidden sm:block w-24 h-28 rounded-xl object-cover shadow"
+          containerClassName="hidden sm:block w-24 h-28 rounded-xl shadow"
+          className="object-cover w-full h-full"
         />
       </div>
 
@@ -86,7 +88,7 @@ function Resume() {
               Currently focused on backend and data-oriented roles, including data ingestion, automation, reporting, and system integration.
               <br />
               <br />
-              And expanding my skills into AI-powered integrations, including LLM API consumption and intelligent automation solutions using Python.
+              And foundational experience developing AI-powered integrations, including the consumption of LLM APIs, building RAG agents using LangChain, and automation solutions with Python.
             </p>
             : <p className="text-muted-foreground leading-relaxed">
               <p>
@@ -115,7 +117,7 @@ function Resume() {
               Actualmente enfocado en roles orientados a backend/frontend y datos, incluyendo ingestión de datos, automatización, informes e integración de sistemas.
               <br />
               <br />
-              Y expandiendo mis habilidades hacia integraciones impulsadas por IA, incluyendo el consumo de APIs de LLM y soluciones de automatización inteligente utilizando Python.
+              Y experiencia fundamental desarrollando integraciones impulsadas por IA, incluyendo el consumo de APIs de modelos LLM,la contrucción de RAG agents usando LangChain y soluciones de automatización con Python.
             </p>
         }
 

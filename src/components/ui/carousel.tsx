@@ -1,6 +1,7 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
+import { ImageWithLoader } from '@/components/ui/image-with-loader'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface CarouselProps {
@@ -44,10 +45,11 @@ export function Carousel({ images, alt, className }: CarouselProps) {
                 rel="noopener noreferrer"
                 className="block w-full h-full"
               >
-                <img
+                <ImageWithLoader
                   src={src}
                   alt={`${alt} - image ${i + 1}`}
-                  className="w-full h-full object-contain object-center bg-muted transition-transform duration-300 group-hover:scale-105"
+                  containerClassName="w-full h-full bg-muted"
+                  className="w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-105"
                 />
               </a>
             </div>
