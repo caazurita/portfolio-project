@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowRight, Github, Linkedin, Mail, ExternalLink, Monitor, Building } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { ImageWithLoader } from '@/components/ui/image-with-loader'
+import { getTechLogoUrl } from '@/lib/tech-logos'
 import { localizeField, useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/')({
@@ -133,11 +134,15 @@ function Home() {
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold">{t('home.expertise')}</h2>
         <div className="flex flex-wrap gap-2">
-          {skills.map((skill) => (
-            <Badge key={skill} variant="secondary" className="text-sm px-3 py-1">
-              {skill}
-            </Badge>
-          ))}
+          {skills.map((skill) => {
+            const logoUrl = getTechLogoUrl(skill)
+            return (
+              <Badge key={skill} variant="secondary" className="text-sm px-3 py-1 flex items-center gap-1">
+                {logoUrl && <img src={logoUrl} alt="" className="size-4" />}
+                {skill}
+              </Badge>
+            )
+          })}
         </div>
       </section>
 

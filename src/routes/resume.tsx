@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { MapPin, Calendar, ArrowRight } from 'lucide-react'
 import { ImageWithLoader } from '@/components/ui/image-with-loader'
+import { getTechLogoUrl } from '@/lib/tech-logos'
 import { localizeField, useLocale } from '@/lib/use-locale'
 
 export const Route = createFileRoute('/resume')({
@@ -147,15 +148,21 @@ function Resume() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                {/* <p className="text-sm text-muted-foreground leading-relaxed">
                   {localizeField(job, 'summary', locale)}
-                </p>
+                </p> */}
                 <div className="flex flex-wrap gap-2">
-                  {job.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
+                  {job.tags.map((tag) => {
+                    const logoUrl = getTechLogoUrl(tag)
+                    return (
+                      <Badge key={tag} variant="outline" className="text-xs flex items-center gap-1">
+                        {logoUrl && (
+                          <img src={logoUrl} alt="" className="size-3.5" />
+                        )}
+                        {tag}
+                      </Badge>
+                    )
+                  })}
                 </div>
                 {/* <p className="text-sm font-bold">
                   Responsibilities
