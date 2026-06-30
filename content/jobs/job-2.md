@@ -13,7 +13,7 @@ tags:
   [
     "React",
     "Tailwind CSS",
-    "MUI",
+    "Materialui",
     "HTML5",
     "Node.js",
     "Express",
